@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("br.jus.cnj")
+@ComponentScan(basePackages="br.jus.cnj")
 public class SpringConfiguration {
 
 	@Bean
