@@ -2,6 +2,7 @@ package br.jus.cnj.configuration;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+
 public class SpringInitialization extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
@@ -17,8 +18,8 @@ public class SpringInitialization extends AbstractAnnotationConfigDispatcherServ
 
 	@Override
 	protected String[] getServletMappings() {
-		// TODO Auto-generated method stub
-		return new String[] { "/" };
+		return new String[] {"/"};
 	}
-
+	
 }
+

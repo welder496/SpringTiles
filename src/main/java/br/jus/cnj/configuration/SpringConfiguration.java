@@ -10,18 +10,17 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages="br.jus.cnj")
+@ComponentScan(basePackages = "br.jus.cnj")
 public class SpringConfiguration {
 
-	@Bean
-	public ViewResolver viewResolver(){
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setViewClass(JstlView.class);
-		viewResolver.setPrefix("/WEB-INF/views/");
-		viewResolver.setSuffix(".jsp");
-		
-		return viewResolver;
-		
-	}
+	  @Bean
+	  public ViewResolver viewResolver() {
+	        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+	        viewResolver.setViewClass(JstlView.class);
+	        viewResolver.setPrefix("/WEB-INF/views/");
+	        viewResolver.setSuffix(".jsp");
+	 
+	        return viewResolver;
+	  }	
 	
 }
