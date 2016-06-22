@@ -7,10 +7,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class SpringController {
 
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	@RequestMapping(value={"/","/index"}, method=RequestMethod.GET)
 	public String getPhrase(){
 		return "index";
 	}
 	
+	@RequestMapping(value="/outraPagina", method=RequestMethod.GET)
+	public String getNewPhrase(){
+		return "outraPagina";
+	}
 	
 }
