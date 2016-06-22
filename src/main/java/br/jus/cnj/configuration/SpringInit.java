@@ -3,7 +3,7 @@ package br.jus.cnj.configuration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 
-public class SpringInitialization extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class SpringInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
