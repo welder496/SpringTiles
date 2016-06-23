@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.jus.cnj.dao.interfaces.ConvidadoDao;
+import br.jus.cnj.dao.interfaces.Dao;
 import br.jus.cnj.model.Convidado;
 
 @Controller
 public class ConvidadoController {
 
 	@Autowired
-	private ConvidadoDao convidados;
+	private Dao<Convidado> convidados;
 	
 	@RequestMapping(value="/novoConvidado", method=RequestMethod.POST)
 	public String novoConvidado(@Valid @ModelAttribute("convidado") Convidado convidado, BindingResult result, Model model){
