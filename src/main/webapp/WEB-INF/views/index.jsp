@@ -3,7 +3,7 @@
 <h2>Spring Basic Application</h2>
 <div>
 <button>
-  <a href="outraPagina">Mudar de página</a>
+  <a href="mostrartodos">Todos os cadastrados</a>
 </button>
 <button>
   <a href="cadastrar">Cadastrar convidados</a>

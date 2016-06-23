@@ -25,15 +25,15 @@ public class ConvidadoController {
         if (!result.hasErrors()) {
             try {
                 convidados.register(convidado);
-                return "redirect:/";
+                return "redirect:/mostrartodos";
             } catch (UnexpectedRollbackException e) {
                 model.addAttribute("convidados", convidados.findAllOrderedByName());
                 model.addAttribute("error", e.getCause().getCause());
-                return "index";
+                return "mostrartodos";
             }
         } else {
             model.addAttribute("convidados", convidados.findAllOrderedByName());
-            return "index";
+            return "mostrartodos";
         }		
 	}
 	
@@ -44,10 +44,10 @@ public class ConvidadoController {
 		return "cadastrar";
 	}
 	
-	@RequestMapping(value="/mostratodos", method=RequestMethod.GET)
+	@RequestMapping(value="/mostrartodos", method=RequestMethod.GET)
 	public String mostraTodos(Model model){
 		model.addAttribute("convidados", convidados.findAllOrderedByName());
-		return "mostratodos";
+		return "mostrartodos";
 	}
 	
 	@RequestMapping(value={"/","/index"}, method=RequestMethod.GET)
