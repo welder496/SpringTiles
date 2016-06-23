@@ -9,7 +9,7 @@
 <body>
   <form:form action="cadastrar" modelAttribute="convidado" method="POST">
   	<div>
-  		<form:label path="nome">Name:</form:label>
+  		<form:label path="nome">Nome:</form:label>
   		<form:input type="text" path="nome"/>
   	</div>
   	<div>
