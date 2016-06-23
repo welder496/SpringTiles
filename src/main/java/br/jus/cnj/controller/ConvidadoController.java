@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.jus.cnj.dao.interfaces.Dao;
+import br.jus.cnj.dao.interfaces.ConvidadoDao;
 import br.jus.cnj.model.Convidado;
 
 @Controller
 public class ConvidadoController {
 
 	@Autowired
-	private Dao<Convidado> convidados;
+	private ConvidadoDao convidados;
 	
 	@RequestMapping(value="/novoConvidado", method=RequestMethod.POST)
 	public String novoConvidado(@Valid @ModelAttribute("convidado") Convidado convidado, BindingResult result, Model model){
@@ -35,6 +35,12 @@ public class ConvidadoController {
             model.addAttribute("convidados", convidados.findAllOrderedByName());
             return "index";
         }		
+	}
+	
+	@RequestMapping(value="/mostratodos", method=RequestMethod.GET)
+	public String mostraTodos(Model model){
+		model.addAttribute("convidados", convidados.findAllOrderedByName());
+		return "mostratodos";
 	}
 	
 	@RequestMapping(value={"/","/index"}, method=RequestMethod.GET)

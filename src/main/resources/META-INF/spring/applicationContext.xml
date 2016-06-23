@@ -26,6 +26,8 @@
     <context:component-scan base-package="br.jus.cnj.model" />
 
     <context:component-scan base-package="br.jus.cnj.repository" />
+    
+    <context:component-scan base-package="br.jus.cnj.dao.interfaces" />
 
     <tx:annotation-driven />
 

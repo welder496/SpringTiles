@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.jus.cnj.dao.interfaces.Dao;
+import br.jus.cnj.dao.interfaces.ConvidadoDao;
 import br.jus.cnj.model.Convidado;
 
 @Repository
 @Transactional
-public class ConvidadoRepository implements Dao<Convidado>{
+public class ConvidadoRepository implements ConvidadoDao {
 
 	@Autowired
 	private EntityManager em;
