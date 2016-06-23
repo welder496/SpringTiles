@@ -20,7 +20,7 @@ public class ConvidadoController {
 	@Autowired
 	private Dao<Convidado> convidados;
 	
-	@RequestMapping(value="/novoConvidado", method=RequestMethod.POST)
+	@RequestMapping(value="/cadastrar", method=RequestMethod.POST)
 	public String novoConvidado(@Valid @ModelAttribute("convidado") Convidado convidado, BindingResult result, Model model){
         if (!result.hasErrors()) {
             try {
@@ -35,6 +35,13 @@ public class ConvidadoController {
             model.addAttribute("convidados", convidados.findAllOrderedByName());
             return "index";
         }		
+	}
+	
+	@RequestMapping(value="/cadastrar", method=RequestMethod.GET)
+	public String cadastrar(Model model){
+		Convidado convidado = new Convidado();
+		model.addAttribute("convidado",convidado);
+		return "cadastrar";
 	}
 	
 	@RequestMapping(value="/mostratodos", method=RequestMethod.GET)

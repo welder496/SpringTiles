@@ -5,6 +5,9 @@
 <button>
   <a href="outraPagina">Mudar de página</a>
 </button>
+<button>
+  <a href="cadastrar">Cadastrar convidados</a>
+</button>
 </div>
 </body>
 </html>
