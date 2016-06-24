@@ -37,7 +37,7 @@
             </c:otherwise>
         </c:choose>
         <div>
-            <spring:url var = "index" value="/"/>        	
+            <spring:url var = "index" value="/index"/>        	
         	<button><a href="${index}">Página Inicial</a></button>
         </div>
 </body>

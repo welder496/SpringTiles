@@ -89,9 +89,4 @@ public class ConvidadoController {
 		return "index";
 	}
 	
-	@RequestMapping(value="/outraPagina", method=RequestMethod.GET)
-	public String getNewPhrase(){
-		return "outraPagina";
-	}
-	
 }
