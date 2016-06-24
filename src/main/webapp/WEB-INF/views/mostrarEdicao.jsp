@@ -8,14 +8,15 @@
 <title>Insert title here</title>
 </head>
 <body>
- <spring:url var = "action" value="/cadastrar"/>
-  <form:form action="${action}" modelAttribute="convidado" method="POST">
+ <spring:url var = "action" value="/atualizar"/>
+ <form:form action="${action}" modelAttribute="convidado" method="POST">
   	<div>
+  		<form:hidden path="codigo" value="${convidado.codigo}" />
   		<form:label path="nome">Nome:</form:label>
   		<form:input type="text" path="nome"/>
   	</div>
   	<div>
-  		<input type="submit" value="Enviar"/>
+  		<input type="submit" value="Atualizar"/>
   	</div>
   </form:form>
 </body>

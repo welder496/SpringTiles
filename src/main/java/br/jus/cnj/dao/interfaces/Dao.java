@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Dao<T> {
 
-    public T findById(int id);
+    public T findById(Integer id);
 
     public T findByName(String name);
 
@@ -13,5 +13,7 @@ public interface Dao<T> {
     public void register(T t);	
     
     public void remove(T t);
+    
+    public void update(T t);
 	
 }

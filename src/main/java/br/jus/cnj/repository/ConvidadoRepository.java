@@ -22,7 +22,7 @@ public class ConvidadoRepository implements Dao<Convidado> {
 	private EntityManager em;
 	
 	@Override
-	public Convidado findById(int id) {
+	public Convidado findById(Integer id) {
 		return em.find(Convidado.class, id);
 	}
 
@@ -50,12 +50,17 @@ public class ConvidadoRepository implements Dao<Convidado> {
 
 	@Override
 	public void register(Convidado t) {
-		em.persist(t);
+		em.persist(em.contains(t) ? t: em.merge(t));
 	}
 
 	@Override
 	public void remove(Convidado t) {
 		em.remove(em.contains(t) ? t : em.merge(t));
+	}
+
+	@Override
+	public void update(Convidado t) {
+		em.persist(t);
 	}
 
 }

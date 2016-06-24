@@ -30,12 +30,37 @@ public class ConvidadoController {
             } catch (UnexpectedRollbackException e) {
                 model.addAttribute("convidados", convidados.findAllOrderedByName());
                 model.addAttribute("error", e.getCause().getCause());
-                return "mostrartodos";
+                return "redirect:/mostrartodos";
             }
         } else {
             model.addAttribute("convidados", convidados.findAllOrderedByName());
-            return "mostrartodos";
+            return "redirect:/mostrartodos";
         }		
+	}
+	
+	@RequestMapping(value="/atualizar", method=RequestMethod.POST)
+	public String atualizar(@Valid @ModelAttribute("convidado") Convidado convidado, BindingResult result, Model model){
+		if (! result.hasErrors()){
+            try {
+                convidados.register(convidado);
+                model.addAttribute("convidados", convidados.findAllOrderedByName());
+                return "redirect:/mostrartodos";
+            } catch (UnexpectedRollbackException e) {
+                model.addAttribute("convidados", convidados.findAllOrderedByName());
+                model.addAttribute("error", e.getCause().getCause());
+                return "redirect:/mostrartodos";
+            }		
+        } else {
+            model.addAttribute("convidados", convidados.findAllOrderedByName());
+            return "redirect:/mostrartodos";
+		}
+	}
+	
+	@RequestMapping(value="/atualizar/{codigo}", method=RequestMethod.GET)
+	public String editar(@PathVariable("codigo") int codigo,@ModelAttribute("convidado") Convidado convidado, Model model){
+		convidado = convidados.findById(codigo);
+		model.addAttribute("convidado", convidado);
+		return "mostrarEdicao";
 	}
 	
 	@RequestMapping(value="/excluir/{codigo}", method=RequestMethod.GET)
