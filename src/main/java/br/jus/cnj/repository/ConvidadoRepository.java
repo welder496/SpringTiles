@@ -53,4 +53,9 @@ public class ConvidadoRepository implements Dao<Convidado> {
 		em.persist(t);
 	}
 
+	@Override
+	public void remove(Convidado t) {
+		em.remove(em.contains(t) ? t : em.merge(t));
+	}
+
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -35,6 +36,14 @@ public class ConvidadoController {
             model.addAttribute("convidados", convidados.findAllOrderedByName());
             return "mostrartodos";
         }		
+	}
+	
+	@RequestMapping(value="/excluir/{codigo}", method=RequestMethod.GET)
+	public String remover(@PathVariable("codigo") int codigo, Model model){
+		Convidado temp = convidados.findById(codigo);
+		convidados.remove(temp);
+		model.addAttribute("convidados",convidados.findAllOrderedByName());
+		return "redirect:/mostrartodos";
 	}
 	
 	@RequestMapping(value="/cadastrar", method=RequestMethod.GET)

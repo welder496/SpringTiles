@@ -25,6 +25,7 @@
                             <tr>
                                 <td>${convidado.codigo}</td>
                                 <td>${convidado.nome}</td>
+                                <td><a href="excluir/${convidado.codigo}">Excluir</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
