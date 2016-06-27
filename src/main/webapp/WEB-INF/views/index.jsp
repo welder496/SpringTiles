@@ -4,7 +4,7 @@
 <h2>Spring Basic Application</h2>
 <div>
 <button>
- <spring:url var = "mostrartodos" value="/mostrartodos"/>
+ <spring:url var = "mostrartodos" value="/mostrartodos/1"/>
  <a href="${mostrartodos}">Todos os cadastrados</a>
 </button>
 <button>
