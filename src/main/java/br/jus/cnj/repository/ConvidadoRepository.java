@@ -1,23 +1,12 @@
 package br.jus.cnj.repository;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
-import br.jus.cnj.dao.interfaces.Dao;
 import br.jus.cnj.model.Convidado;
 
-@Repository
-@Transactional
-public class ConvidadoRepository implements Dao<Convidado> {
+interface ConvidadoRepository extends JpaRepository<Convidado,Integer> {
 
+/*	
 	@Autowired
 	private EntityManager em;
 	
@@ -62,5 +51,5 @@ public class ConvidadoRepository implements Dao<Convidado> {
 	public void update(Convidado t) {
 		em.persist(t);
 	}
-
+*/
 }
