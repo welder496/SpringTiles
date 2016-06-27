@@ -91,8 +91,11 @@ public class ConvidadoController {
 	
 	@RequestMapping(value="/mostrartodos/{pageNumber}", method=RequestMethod.GET)
 	public String mostraTodosPaginado(@PathVariable("pageNumber") Integer pageNumber, Model model) {
-		Page<Convidado> page = convidadosService.getConvidadosPagination(pageNumber);
+		if (pageNumber < 0 || pageNumber > convidados.count())
+			pageNumber = 1;
 		
+		Page<Convidado> page = convidadosService.getConvidadosPagination(pageNumber);
+			
 		int current = page.getNumber() + 1;
 		int begin = Math.max(1, current - 5);
 		int end = Math.min(begin + 5, page.getTotalPages());
