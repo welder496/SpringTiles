@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security.xsd">
+ 
+ 	<global-method-security pre-post-annotations="enabled"/>
+ 
+    <http auto-config="true" use-expressions="true">
+    	<intercept-url pattern="/" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/mostrartodos/**" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/atualizar/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/excluir/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/cadastrar**" access="hasRole('ROLE_ADMIN')" />
+    </http>
+ 
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="user" password="12345" authorities="ROLE_USER" />
+                <user name="welder" password="942704" authorities="ROLE_ADMIN" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+ 
+</beans:beans>

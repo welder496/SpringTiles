@@ -24,7 +24,8 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:/META-INF/spring/applicationContext.xml,
                      classpath:/META-INF/spring/infrastructure.xml,
-                     classpath:/META-INF/spring/jpaContext.xml
+                     classpath:/META-INF/spring/jpaContext.xml,
+                     classpath:/META-INF/spring/springSecurity.xml                     
         </param-value>
     </context-param>
 
@@ -46,6 +47,17 @@
         <servlet-name>Spring-Declarative</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+	<!-- Spring Security -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 </web-app>
 
