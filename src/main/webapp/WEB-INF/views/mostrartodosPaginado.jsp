@@ -15,8 +15,8 @@
 <c:url var="prevUrl" value="/mostrartodos/${currentIndex-1}" />
 <c:url var="nextUrl" value="/mostrartodos/${currentIndex+1}" />
 
-<div class="pagination">
-    <ul>
+<div class="container">
+    <ul class="pagination">
         <c:choose>
             <c:when test="${currentIndex == 1}">
                 <li class="disabled"><a href="#">&lt;&lt;</a></li>
@@ -54,7 +54,7 @@
                 <em>Nenhum convidado cadastrado</em>
             </c:when>
             <c:otherwise>
-                <table id="membersTable">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Código</th>
@@ -78,7 +78,7 @@
         </c:choose>
         <div>
             <spring:url var = "index" value="/index"/>        	
-        	<button><a href="${index}">Página Inicial</a></button>
+        	<button class="btn btn-secondary"><a href="${index}">Página Inicial</a></button>
         </div>        
 </div>
 </body>
