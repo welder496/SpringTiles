@@ -7,20 +7,23 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/static/resources/css/bootstrap.min.css"/>"/>
+	<link href="<c:url value="/static/resources/css/app.css"/>" rel="stylesheet"/>		
 	<title>Alterar Convidados</title>
 </head>
 <body>
- <div class="container">
-	 <spring:url var = "action" value="/atualizar"/>
-	 <h3> Alterar convidados</h3>
-	 <form:form action="${action}" modelAttribute="convidado" method="POST">
-  		<fieldset class="form-group">
-  			<form:label path="nome">Nome</form:label>
-  			<form:input type="text" path="nome" class="form-control"/>
-  		</fieldset>
-		<input type="submit" value="Atualizar" class="btn btn-secondary"/>
-  		<form:hidden path="codigo" value="${convidado.codigo}" />
-   	 </form:form>
-  </div>
+  <div id="mainWrapper">
+	 <div class="container">
+		 <spring:url var = "action" value="/atualizar"/>
+		 <h3> Alterar convidados</h3>
+		 <form:form action="${action}" modelAttribute="convidado" method="POST">
+	  		<fieldset class="form-group">
+	  			<form:label path="nome">Nome</form:label>
+	  			<form:input type="text" path="nome" class="form-control"/>
+	  		</fieldset>
+			<input type="submit" value="Atualizar" class="btn btn-secondary"/>
+	  		<form:hidden path="codigo" value="${convidado.codigo}" />
+	   	 </form:form>
+	  </div>
+  </div>	  
 </body>
 </html>

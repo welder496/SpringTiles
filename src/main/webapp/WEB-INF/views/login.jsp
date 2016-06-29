@@ -17,21 +17,21 @@
 						<form action="${loginUrl}" method="POST" class="form-horizontal">
 							<c:if test="${param.error != null}">
 								<div class="alert alert-danger">
-									<p>Invalid username and password.</p>
+									<p>Usuário ou senha inválidos!!</p>
 								</div>
 							</c:if>
 							<c:if test="${param.logout != null}">
 								<div class="alert alert-success">
-									<p>You have been logged out successfully.</p>
+									<p>Desconectado com sucesso!!.</p>
 								</div>
 							</c:if>
 							<div class="input-group input-sm">
 								<label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
-								<input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required>
+								<input type="text" class="form-control" id="username" name="username" placeholder="Usuário" required>
 							</div>
 							<div class="input-group input-sm">
 								<label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label> 
-								<input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+								<input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
 							</div>
 							<input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />
 								

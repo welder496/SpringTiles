@@ -7,6 +7,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/static/resources/css/bootstrap.min.css"/>"/>
+	<link href="<c:url value="/static/resources/css/app.css"/>" rel="stylesheet"/>	
 	<title>Todos os convidados</title>
 </head>
 <body>
@@ -15,7 +16,8 @@
 <c:url var="prevUrl" value="/mostrartodos/${currentIndex-1}" />
 <c:url var="nextUrl" value="/mostrartodos/${currentIndex+1}" />
 
-<div class="container">
+<div id="mainWrapper">
+  <div class="container">
     <ul class="pagination">
         <c:choose>
             <c:when test="${currentIndex == 1}">
@@ -80,6 +82,7 @@
             <spring:url var = "index" value="/index"/>        	
         	<button class="btn btn-secondary"><a href="${index}">Página Inicial</a></button>
         </div>        
-</div>
+  </div>
+</div>  
 </body>
 </html>

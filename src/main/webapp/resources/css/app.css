@@ -1,6 +1,6 @@
 
 html{
-	background-color:#2F2F2F;
+	background-color:#ADD8E6;
 }
 
 body, #mainWrapper {
@@ -9,20 +9,20 @@ body, #mainWrapper {
 	linear,
 	right bottom,
 	right top,
-	color-stop(0, #EDEDED),
-	color-stop(0.08, #EAEAEA),
-	color-stop(1, #2F2F2F),
-	color-stop(1, #AAAAAA)
+	color-stop(0, #EAF5F8),
+	color-stop(0.50, #CBE6EF),
+	color-stop(0.75, #ADD8E6),
+	color-stop(1, #FFFFFF)
 );
-background-image: -o-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
-background-image: -moz-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
-background-image: -webkit-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
-background-image: -ms-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
-background-image: linear-gradient(to top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
+background-image: -o-linear-gradient(top, #EAF5F8 0%, #CBE6EF 50%, #ADD8E6 75%, #FFFFFF 100%);
+background-image: -moz-linear-gradient(top, #EAF5F8 0%, #CBE6EF 50%, #ADD8E6 75%, #FFFFFF 100%);
+background-image: -webkit-linear-gradient(top, #EAF5F8 0%, #CBE6EF 50%, #ADD8E6 75%, #FFFFFF 100%);
+background-image: -ms-linear-gradient(top, #EAF5F8 0%, #CBE6EF 50%, #ADD8E6 75%, #FFFFFF 100%);
+background-image: linear-gradient(to top, #EAF5F8 0%, #CBE6EF 50%, #ADD8E6 75%, #FFFFFF 100%);
 }
 
 body, #mainWrapper, .form-control{
-	font-size:12px!important;
+	font-size:14px!important;
 }
 
 #mainWrapper {

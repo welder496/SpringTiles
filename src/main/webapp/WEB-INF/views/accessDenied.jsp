@@ -3,10 +3,22 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>AccessDenied page</title>
+	<title>Acesso não permitido</title>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/static/resources/css/bootstrap.min.css"/>"/>	
+	<link href="<c:url value="/static/resources/css/app.css"/>" rel="stylesheet"/>		
 </head>
 <body>
-	Dear <strong>${user}</strong>, You are not authorized to access this page
-	<a href="<c:url value="/logout" />">Logout</a>
+  <div id="mainWrapper">
+	<div class="login-container">
+	  <div class="login-card">	
+	    <div class="login-form">
+	  		<div class="alert alert-danger">
+				<strong>Você não tem autorização para acessar esta página!!</strong>
+				<a href="<c:url value="/logout" />">Logout</a>
+	  		</div>
+	  	</div>	
+	  </div>	
+	</div>
+  </div>	
 </body>
 </html>
