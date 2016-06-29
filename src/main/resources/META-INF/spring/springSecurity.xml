@@ -6,14 +6,18 @@ http://www.springframework.org/schema/beans/spring-beans.xsd
 http://www.springframework.org/schema/security
 http://www.springframework.org/schema/security/spring-security.xsd">
  
- 	<global-method-security pre-post-annotations="enabled"/>
- 
     <http auto-config="true" use-expressions="true">
-    	<intercept-url pattern="/" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/mostrartodos/**" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" />
+    	<intercept-url pattern="/login" access="permitAll"/> 
+     	<intercept-url pattern="/" access="permitAll"/>
+        <intercept-url pattern="/mostrartodos/**" access="permitAll" />
         <intercept-url pattern="/atualizar/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/excluir/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/cadastrar**" access="hasRole('ROLE_ADMIN')" />
+        <form-login  login-page="/login"
+                     username-parameter="username"
+                     password-parameter="password"
+                     authentication-failure-url="/Access_Denied" />
+        <access-denied-handler error-page="/Access_Denied"/>             
     </http>
  
     <authentication-manager>
