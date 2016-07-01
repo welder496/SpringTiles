@@ -15,7 +15,7 @@
 	 <div class="container">
 		 <spring:url var = "action" value="/atualizar"/>
 		 <h3> Alterar convidados</h3>
-		 <form:form action="${action}" modelAttribute="convidado" method="POST">
+		 <form:form action="${action}?usuario=${usuario}" modelAttribute="convidado" method="POST">
 	  		<fieldset class="form-group">
 	  			<form:label path="nome">Nome</form:label>
 	  			<form:input type="text" path="nome" class="form-control"/>

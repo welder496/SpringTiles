@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <html>
 <head>
@@ -11,14 +12,14 @@
 <body>
 <div id="mainWrapper">
 	<div class="container">
-		<h2>Spring Basic Application</h2>
-		<button class="btn btn-secondary">
- 			<spring:url var = "mostrartodos" value="/mostrartodos/1"/>
+        <h3>Bem vindo: ${usuario}</h3>
+ 		<button class="btn btn-secondary">
+ 			<spring:url var = "mostrartodos" value="/mostrartodos/1?usuario=${usuario}"/>
  			<a href="${mostrartodos}">Todos os cadastrados</a>
 		</button>
 		<security:authorize access="hasRole('ROLE_ADMIN')">
 		<button class="btn btn-secondary">
- 			<spring:url var = "cadastrar" value="/cadastrar"/>
+ 			<spring:url var = "cadastrar" value="/cadastrar/?usuario=${usuario}"/>
  			<a href="${cadastrar}">Cadastrar convidados</a>
 		</button>
 		</security:authorize>

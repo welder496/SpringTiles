@@ -32,6 +32,13 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
+	<!-- Spring Security Session Control -->
+	<listener>
+    	<listener-class>
+      		org.springframework.security.web.session.HttpSessionEventPublisher
+    	</listener-class>
+	</listener>
      
     <servlet>
         <servlet-name>Spring-Declarative</servlet-name>

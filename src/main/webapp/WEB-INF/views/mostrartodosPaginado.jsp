@@ -20,24 +20,25 @@
 <div id="mainWrapper">
   <div class="container">
     <ul class="pagination">
+    	<c:set var="usuario" value="${usuario}"/>
         <c:choose>
             <c:when test="${currentIndex == 1}">
                 <li class="disabled"><a href="#">&lt;&lt;</a></li>
                 <li class="disabled"><a href="#">&lt;</a></li>
             </c:when>
             <c:otherwise>
-                <li><a href="${firstUrl}">&lt;&lt;</a></li>
-                <li><a href="${prevUrl}">&lt;</a></li>
+                <li><a href="${firstUrl}?usuario=${usuario}">&lt;&lt;</a></li>
+                <li><a href="${prevUrl}?usuario=${usuario}">&lt;</a></li>
             </c:otherwise>
         </c:choose>
         <c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
             <c:url var="pageUrl" value="/mostrartodos/${i}" />
             <c:choose>
                 <c:when test="${i == currentIndex}">
-                    <li class="active"><a href="${pageUrl}"><c:out value="${i}" /></a></li>
+                    <li class="active"><a href="${pageUrl}?usuario=${usuario}"><c:out value="${i}" /></a></li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="${pageUrl}"><c:out value="${i}" /></a></li>
+                    <li><a href="${pageUrl}?usuario=${usuario}"><c:out value="${i}" /></a></li>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
@@ -47,8 +48,8 @@
                 <li class="disabled"><a href="#">&gt;&gt;</a></li>
             </c:when>
             <c:otherwise>
-                <li><a href="${nextUrl}">&gt;</a></li>
-                <li><a href="${lastUrl}">&gt;&gt;</a></li>
+                <li><a href="${nextUrl}?usuario=${usuario}">&gt;</a></li>
+                <li><a href="${lastUrl}?usuario=${usuario}">&gt;&gt;</a></li>
             </c:otherwise>
         </c:choose>
     </ul>
@@ -70,9 +71,9 @@
                                 <td>${convidado.codigo}</td>
                                 <td>${convidado.nome}</td>
                                 <security:authorize access="hasRole('ROLE_ADMIN')">
-	                                <spring:url var = "atualizar" value="/atualizar/${convidado.codigo}"/>     
+	                                <spring:url var = "atualizar" value="/atualizar/${convidado.codigo}?usuario=${usuario}"/>     
 	                                <td><a href="${atualizar}">Alterar</a></td>
-	                                <spring:url var = "excluir" value="/excluir/${convidado.codigo}"/>     
+	                                <spring:url var = "excluir" value="/excluir/${convidado.codigo}?usuario=${usuario}"/>     
 	                                <td><a href="${excluir}">Excluir</a></td>
 	                            </security:authorize>
                             </tr>
@@ -83,7 +84,7 @@
         </c:choose>
         <div>
             <spring:url var = "index" value="/index"/>        	
-        	<button class="btn btn-secondary"><a href="${index}">Página Inicial</a></button>
+        	<button class="btn btn-secondary"><a href="${index}?usuario=${usuario}">Página Inicial</a></button>
         </div>        
   </div>
 </div>  

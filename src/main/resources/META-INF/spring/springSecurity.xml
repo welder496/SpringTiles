@@ -6,7 +6,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd
 http://www.springframework.org/schema/security
 http://www.springframework.org/schema/security/spring-security.xsd">
  
-    <http auto-config="true" use-expressions="true">
+    <http auto-config="false" use-expressions="true">
     	<intercept-url pattern="/login" access="permitAll"/> 
      	<intercept-url pattern="/" access="isAuthenticated()"/>
         <intercept-url pattern="/mostrartodos/**" access="permitAll" />
@@ -17,7 +17,14 @@ http://www.springframework.org/schema/security/spring-security.xsd">
                      username-parameter="username"
                      password-parameter="password"
                      authentication-failure-url="/Access_Denied" />
-        <access-denied-handler error-page="/Access_Denied"/>             
+                     
+        <logout logout-url="/Access_Denied" invalidate-session="true"/>             
+        <access-denied-handler error-page="/Access_Denied"/>     
+        
+		<session-management>
+        	<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" expired-url="/Access_Denied"
+        	session-registry-alias="sessionRegistry"/>
+    	</session-management>                
     </http>
  
     <authentication-manager>
