@@ -13,7 +13,7 @@
 </head>
 <body>
 <c:url var="firstUrl" value="/mostrartodos/1" />
-<c:url var="lastUrl" value="/mostrartodos/${convidadosServ.totalPages}" />
+<c:url var="lastUrl" value="/mostrartodos/${totalPages}" />
 <c:url var="prevUrl" value="/mostrartodos/${currentIndex-1}" />
 <c:url var="nextUrl" value="/mostrartodos/${currentIndex+1}" />
 
@@ -43,7 +43,7 @@
             </c:choose>
         </c:forEach>
         <c:choose>
-            <c:when test="${currentIndex == convidadosServ.totalPages}">
+            <c:when test="${currentIndex == totalPages}">
                 <li class="disabled"><a href="#">&gt;</a></li>
                 <li class="disabled"><a href="#">&gt;&gt;</a></li>
             </c:when>
@@ -55,7 +55,7 @@
     </ul>
       <c:choose>
             <c:when test="${convidados.size()==0}">
-                <em>Nenhum convidado cadastrado</em>
+                <em>Nenhum Convidado cadastrado</em>
             </c:when>
             <c:otherwise>
                 <table class="table table-hover">

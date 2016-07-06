@@ -3,6 +3,8 @@
     <persistence-unit name="config">
         <jta-data-source>java:jboss/datasources/SpringDatabaseBasicDS</jta-data-source>
  	    <class>br.jus.cnj.model.Convidado</class>
+ 	    <class>br.jus.cnj.model.Regra</class>
+ 	    <class>br.jus.cnj.model.Usuario</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="jboss.entity.manager.factory.jndi.name" 

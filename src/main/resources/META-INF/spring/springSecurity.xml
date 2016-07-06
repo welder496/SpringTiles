@@ -25,6 +25,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
         	<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" expired-url="/Access_Denied"
         	session-registry-alias="sessionRegistry"/>
     	</session-management>                
+    	<csrf/>
     </http>
  
     <authentication-manager>

@@ -20,6 +20,7 @@
   				<form:label path="nome">Nome</form:label>
   				<form:input type="text" path="nome" class="form-control"/>
   			</fieldset>
+			<input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />
 			<input type="submit" value="Enviar" class="btn btn-secondary"/>
   		</form:form>
 	</div> 

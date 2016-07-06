@@ -102,7 +102,7 @@ public class ConvidadoController {
 		convidado = convidados.findOne(codigo);
 		model.addAttribute("convidado", convidado);
 		model.addAttribute("usuario",usuario);
-		return "mostrarEdicao";
+		return "mostrarEdicaoConvidado";
 	}
 	
 	@RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
@@ -125,21 +125,18 @@ public class ConvidadoController {
 		Convidado convidado = new Convidado();
 		model.addAttribute("convidado",convidado);
 		model.addAttribute("usuario",usuario);
-		return "cadastrar";
+		return "cadastrarConvidado";
 	}
 	
 	@RequestMapping(value="/mostrartodos", method=RequestMethod.GET)
 	public String mostraTodos(Model model){
 		model.addAttribute("convidados", convidados.findAllOrdered());
-		return "mostrartodosPaginado";
+		return "mostrarConvidadosPaginado";
 	}
 	
 	@RequestMapping(value="/mostrartodos/{pageNumber}", method=RequestMethod.GET)
 	public String mostraTodosPaginado(@RequestParam(value="usuario", required=false) String usuario,@PathVariable("pageNumber") Integer pageNumber, Model model) {
 		getCurrentUser(usuario);
-		
-		if (pageNumber < 0 || pageNumber > convidados.count())
-			pageNumber = 1;
 		
 		Page<Convidado> page = convidadosService.getConvidadosPagination(pageNumber);
 			
@@ -151,10 +148,11 @@ public class ConvidadoController {
 		model.addAttribute("beginIndex", begin);
 		model.addAttribute("endIndex", end);
 		model.addAttribute("currentIndex", current);
+		model.addAttribute("totalPages", page.getTotalPages() == 0 ? 1: page.getTotalPages());		
 		model.addAttribute("convidados", page.getContent());
 		model.addAttribute("usuario",usuario);
 		
-		return "mostrartodosPaginado";
+		return "mostrarConvidadosPaginado";
 	}
 	
 	@RequestMapping(value={"/","/index"}, method=RequestMethod.GET)

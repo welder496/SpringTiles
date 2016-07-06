@@ -21,6 +21,7 @@
 	  			<form:input type="text" path="nome" class="form-control"/>
 	  		</fieldset>
 			<input type="submit" value="Atualizar" class="btn btn-secondary"/>
+			<input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />
 	  		<form:hidden path="codigo" value="${convidado.codigo}" />
 	   	 </form:form>
 	  </div>
