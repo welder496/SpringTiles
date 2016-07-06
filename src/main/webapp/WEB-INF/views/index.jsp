@@ -14,12 +14,12 @@
 	<div class="container">
         <h3>Bem vindo: ${usuario}</h3>
  		<button class="btn btn-secondary">
- 			<spring:url var = "mostrarConvidados" value="/mostrartodos/1?usuario=${usuario}"/>
+ 			<spring:url var = "mostrarConvidados" value="/mostrarConvidados/1?usuario=${usuario}"/>
  			<a href="${mostrarConvidados}">Todos os cadastrados</a>
 		</button>
 		<security:authorize access="hasRole('ROLE_ADMIN')">
 		<button class="btn btn-secondary">
- 			<spring:url var = "cadastrarConvidado" value="/cadastrar/?usuario=${usuario}"/>
+ 			<spring:url var = "cadastrarConvidado" value="/cadastrarConvidado/?usuario=${usuario}"/>
  			<a href="${cadastrarConvidado}">Cadastrar convidados</a>
 		</button>
 		</security:authorize>

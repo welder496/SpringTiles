@@ -10,6 +10,19 @@
 	<title>Cadastrar Usuários</title>
 </head>
 <body>
-
+<div id="mainWrapper">
+	<div class="container">
+  		<spring:url var = "action" value="/cadastrarUsuario"/>
+  		<h3> Cadastrar Convidados</h3>
+  		<form:form action="${action}?usuario=${usuario}" modelAttribute="convidado" method="POST">
+			<fieldset class="form-group">
+  				<form:label path="nome">Nome</form:label>
+  				<form:input type="text" path="nome" class="form-control"/>
+  			</fieldset>
+			<input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />
+			<input type="submit" value="Enviar" class="btn btn-secondary"/>
+  		</form:form>
+	</div> 
+</div> 
 </body>
 </html>

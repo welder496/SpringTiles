@@ -13,7 +13,7 @@
 <body>
 <div id="mainWrapper">
 	<div class="container">
-  		<spring:url var = "action" value="/cadastrar"/>
+  		<spring:url var = "action" value="/cadastrarConvidado"/>
   		<h3> Cadastrar Convidados</h3>
   		<form:form action="${action}?usuario=${usuario}" modelAttribute="convidado" method="POST">
 			<fieldset class="form-group">

@@ -47,20 +47,20 @@ public class ConvidadoController {
 	@Qualifier("sessionRegistry")
 	private SessionRegistry sessionRegistry;
 	
-	@RequestMapping(value="/cadastrar", method=RequestMethod.POST)
+	@RequestMapping(value="/cadastrarConvidado", method=RequestMethod.POST)
 	public String novoConvidado(@RequestParam(value="usuario", required=false) String usuario,@Valid @ModelAttribute("convidado") Convidado convidado, BindingResult result, Model model){
         if (!result.hasErrors()) {
             try {
                 convidados.save(convidado);
-                return "redirect:/mostrartodos/1?usuario="+usuario;
+                return "redirect:/mostrarConvidados/1?usuario="+usuario;
             } catch (UnexpectedRollbackException e) {
                 model.addAttribute("convidados", convidados.findAllOrdered());
                 model.addAttribute("error", e.getCause().getCause());
-                return "redirect:/mostrartodos/1?usuario="+usuario;
+                return "redirect:/mostrarConvidados/1?usuario="+usuario;
             }
         } else {
             model.addAttribute("convidados", convidados.findAllOrdered());
-            return "redirect:/mostrartodos/1?usuario="+usuario;
+            return "redirect:/mostrarConvidados/1?usuario="+usuario;
         }		
 	}
 	
@@ -79,25 +79,25 @@ public class ConvidadoController {
 	    return "redirect:/login?logout";
 	}
 	
-	@RequestMapping(value="/atualizar", method=RequestMethod.POST)
+	@RequestMapping(value="/atualizarConvidado", method=RequestMethod.POST)
 	public String atualizar(@RequestParam(value="usuario", required=false) String usuario,@Valid @ModelAttribute("convidado") Convidado convidado, BindingResult result, Model model){
 		if (! result.hasErrors()){
             try {
                 convidados.save(convidado);
                 model.addAttribute("convidados", convidados.findAllOrdered());
-                return "redirect:/mostrartodos/1?usuario="+usuario;
+                return "redirect:/mostrarConvidados/1?usuario="+usuario;
             } catch (UnexpectedRollbackException e) {
                 model.addAttribute("convidados", convidados.findAllOrdered());
                 model.addAttribute("error", e.getCause().getCause());
-                return "redirect:/mostrartodos/1?usuario="+usuario;
+                return "redirect:/mostrarConvidados/1?usuario="+usuario;
             }		
         } else {
             model.addAttribute("convidados", convidados.findAllOrdered());
-            return "redirect:/mostrartodos/1?usuario="+usuario;
+            return "redirect:/mostrarConvidados/1?usuario="+usuario;
 		}
 	}
 	
-	@RequestMapping(value="/atualizar/{codigo}", method=RequestMethod.GET)
+	@RequestMapping(value="/atualizarConvidado/{codigo}", method=RequestMethod.GET)
 	public String editar(@RequestParam(value="usuario", required=false) String usuario,@PathVariable("codigo") int codigo,@ModelAttribute("convidado") Convidado convidado, Model model){
 		convidado = convidados.findOne(codigo);
 		model.addAttribute("convidado", convidado);
@@ -112,15 +112,15 @@ public class ConvidadoController {
 	}	
 	
 	
-	@RequestMapping(value="/excluir/{codigo}", method=RequestMethod.GET)
+	@RequestMapping(value="/excluirConvidado/{codigo}", method=RequestMethod.GET)
 	public String remover(@RequestParam(value="usuario", required=false) String usuario,@PathVariable("codigo") int codigo, Model model){
 		Convidado temp = convidados.findOne(codigo);
 		convidados.delete(temp);
 		model.addAttribute("convidados",convidados.findAllOrdered());
-		return "redirect:/mostrartodos/1?usuario="+usuario;
+		return "redirect:/mostrarConvidados/1?usuario="+usuario;
 	}
 	
-	@RequestMapping(value="/cadastrar", method=RequestMethod.GET)
+	@RequestMapping(value="/cadastrarConvidado", method=RequestMethod.GET)
 	public String cadastrar(@RequestParam(value="usuario", required=false) String usuario,Model model){
 		Convidado convidado = new Convidado();
 		model.addAttribute("convidado",convidado);
@@ -134,7 +134,7 @@ public class ConvidadoController {
 		return "mostrarConvidadosPaginado";
 	}
 	
-	@RequestMapping(value="/mostrartodos/{pageNumber}", method=RequestMethod.GET)
+	@RequestMapping(value="/mostrarConvidados/{pageNumber}", method=RequestMethod.GET)
 	public String mostraTodosPaginado(@RequestParam(value="usuario", required=false) String usuario,@PathVariable("pageNumber") Integer pageNumber, Model model) {
 		getCurrentUser(usuario);
 		
