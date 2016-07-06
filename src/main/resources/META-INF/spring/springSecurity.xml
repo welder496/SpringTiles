@@ -28,13 +28,13 @@ http://www.springframework.org/schema/security/spring-security.xsd">
     	<csrf/>
     </http>
  
-    <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="user" password="12345" authorities="ROLE_USER" />
-                <user name="welder" password="942704" authorities="ROLE_ADMIN" />
-            </user-service>
-        </authentication-provider>
-    </authentication-manager>
- 
+ 	<authentication-manager>
+ 		<authentication-provider>
+ 			<jdbc-user-service data-source-ref="dataSource"
+ 			  users-by-username-query="select username,password,enabled from usuario where username=?"
+ 			  authorities-by-username-query="select u.username, r.descricao from usuario u, regra r where 
+ 			                                 r.codigo=u.regraid and u.username=? " />
+ 		</authentication-provider>
+ 	</authentication-manager>
+
 </beans:beans>
