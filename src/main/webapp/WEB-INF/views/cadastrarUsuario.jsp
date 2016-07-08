@@ -14,7 +14,7 @@
 <div id="mainWrapper">
 	<div class="container">
   		<spring:url var = "action" value="/cadastrarUsuario"/>
-  		<h3> Cadastrar Usuarios</h3>
+  		<h3> Cadastrar Usuários</h3>
   		<form:form action="${action}?usuario=${usr}" modelAttribute="usuario" method="POST">
 			<div class="row">
 				<fieldset class="form-group col-sm-4">
@@ -42,8 +42,11 @@
   			</div>
   			<div class="row">
   				<fieldset class="form-group col-sm-4">
-  					<form:label path="regranome">Regra</form:label>
-  					<form:select path="regranome" items="${regras}" class="form-control"/>
+  					<form:label path="regra">Regra</form:label>
+ 					<form:select path="descricaoRegra" class="form-control">
+  						<form:option value="---Item não selecionado---"/>
+  						<form:options items="${regras}"/>
+  					</form:select>
   				</fieldset>
   			</div>	
   			<div class="row">

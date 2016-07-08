@@ -15,4 +15,7 @@ public interface RegraRepository extends JpaRepository<Regra,Integer>{
 	@Query("Select r from Regra r where r.descricao=?")
 	Regra findRegraByDescription(String description);
 	
+	@Query("Select r.descricao from Regra r where r.codigo=?")	
+	String findDescriptionByCodigo(Integer codigo);
+	
 }

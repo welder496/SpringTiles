@@ -80,7 +80,7 @@ public class ConvidadoController {
 	}
 	
 	@RequestMapping(value="/atualizarConvidado", method=RequestMethod.POST)
-	public String atualizar(@RequestParam(value="usuario", required=false) String usuario,@Valid @ModelAttribute("convidado") Convidado convidado, BindingResult result, Model model){
+	public String atualizarConvidado(@RequestParam(value="usuario", required=false) String usuario,@Valid @ModelAttribute("convidado") Convidado convidado, BindingResult result, Model model){
 		if (! result.hasErrors()){
             try {
                 convidados.save(convidado);
@@ -98,7 +98,7 @@ public class ConvidadoController {
 	}
 	
 	@RequestMapping(value="/atualizarConvidado/{codigo}", method=RequestMethod.GET)
-	public String editar(@RequestParam(value="usuario", required=false) String usuario,@PathVariable("codigo") int codigo,@ModelAttribute("convidado") Convidado convidado, Model model){
+	public String editarConvidado(@RequestParam(value="usuario", required=false) String usuario,@PathVariable("codigo") int codigo,@ModelAttribute("convidado") Convidado convidado, Model model){
 		convidado = convidados.findOne(codigo);
 		model.addAttribute("convidado", convidado);
 		model.addAttribute("usuario",usuario);
@@ -113,7 +113,7 @@ public class ConvidadoController {
 	
 	
 	@RequestMapping(value="/excluirConvidado/{codigo}", method=RequestMethod.GET)
-	public String remover(@RequestParam(value="usuario", required=false) String usuario,@PathVariable("codigo") int codigo, Model model){
+	public String removerConvidado(@RequestParam(value="usuario", required=false) String usuario,@PathVariable("codigo") int codigo, Model model){
 		Convidado temp = convidados.findOne(codigo);
 		convidados.delete(temp);
 		model.addAttribute("convidados",convidados.findAllOrdered());
@@ -121,21 +121,15 @@ public class ConvidadoController {
 	}
 	
 	@RequestMapping(value="/cadastrarConvidado", method=RequestMethod.GET)
-	public String cadastrar(@RequestParam(value="usuario", required=false) String usuario,Model model){
+	public String cadastrarConvidado(@RequestParam(value="usuario", required=false) String usuario,Model model){
 		Convidado convidado = new Convidado();
 		model.addAttribute("convidado",convidado);
 		model.addAttribute("usuario",usuario);
 		return "cadastrarConvidado";
 	}
 	
-	@RequestMapping(value="/mostrartodos", method=RequestMethod.GET)
-	public String mostraTodos(Model model){
-		model.addAttribute("convidados", convidados.findAllOrdered());
-		return "mostrarConvidadosPaginado";
-	}
-	
 	@RequestMapping(value="/mostrarConvidados/{pageNumber}", method=RequestMethod.GET)
-	public String mostraTodosPaginado(@RequestParam(value="usuario", required=false) String usuario,@PathVariable("pageNumber") Integer pageNumber, Model model) {
+	public String mostraConvidadosPaginado(@RequestParam(value="usuario", required=false) String usuario,@PathVariable("pageNumber") Integer pageNumber, Model model) {
 		getCurrentUser(usuario);
 		
 		Page<Convidado> page = convidadosService.getConvidadosPagination(pageNumber);

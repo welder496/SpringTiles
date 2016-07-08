@@ -18,25 +18,25 @@
 <div id="mainWrapper">
   <div class="container">
     <ul class="pagination">
-    	<c:set var="usuario" value="${usuario}"/>
+    	<c:set var="usr" value="${usr}"/>
         <c:choose>
             <c:when test="${currentIndex == 1}">
                 <li class="disabled"><a href="#">&lt;&lt;</a></li>
                 <li class="disabled"><a href="#">&lt;</a></li>
             </c:when>
             <c:otherwise>
-                <li><a href="${firstUrl}?usuario=${usuario}">&lt;&lt;</a></li>
-                <li><a href="${prevUrl}?usuario=${usuario}">&lt;</a></li>
+                <li><a href="${firstUrl}?usuario=${usr}">&lt;&lt;</a></li>
+                <li><a href="${prevUrl}?usuario=${usr}">&lt;</a></li>
             </c:otherwise>
         </c:choose>
         <c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
             <c:url var="pageUrl" value="/mostrarUsuarios/${i}" />
             <c:choose>
                 <c:when test="${i == currentIndex}">
-                    <li class="active"><a href="${pageUrl}?usuario=${usuario}"><c:out value="${i}" /></a></li>
+                    <li class="active"><a href="${pageUrl}?usuario=${usr}"><c:out value="${i}" /></a></li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="${pageUrl}?usuario=${usuario}"><c:out value="${i}" /></a></li>
+                    <li><a href="${pageUrl}?usuario=${usr}"><c:out value="${i}" /></a></li>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
@@ -46,8 +46,8 @@
                 <li class="disabled"><a href="#">&gt;&gt;</a></li>
             </c:when>
             <c:otherwise>
-                <li><a href="${nextUrl}?usuario=${usuario}">&gt;</a></li>
-                <li><a href="${lastUrl}?usuario=${usuario}">&gt;&gt;</a></li>
+                <li><a href="${nextUrl}?usuario=${usr}">&gt;</a></li>
+                <li><a href="${lastUrl}?usuario=${usr}">&gt;&gt;</a></li>
             </c:otherwise>
         </c:choose>
     </ul>
@@ -69,9 +69,9 @@
                                 <td>${usuario.codigo}</td>
                                 <td>${usuario.nome}</td>
                                 <security:authorize access="hasRole('ROLE_ADMIN')">
-	                                <spring:url var = "atualizar" value="/atualizarUsuario/${usuario.codigo}?usuario=${usuario}"/>     
+	                                <spring:url var = "atualizar" value="/atualizarUsuario/${usuario.codigo}?usuario=${usr}"/>     
 	                                <td><a href="${atualizar}">Alterar</a></td>
-	                                <spring:url var = "excluir" value="/excluirUsuario/${usuario.codigo}?usuario=${usuario}"/>     
+	                                <spring:url var = "excluir" value="/excluirUsuario/${usuario.codigo}?usuario=${usr}"/>     
 	                                <td><a href="${excluir}">Excluir</a></td>
 	                            </security:authorize>
                             </tr>
@@ -82,7 +82,7 @@
         </c:choose>
         <div>
             <spring:url var = "index" value="/index"/>        	
-        	<button class="btn btn-secondary"><a href="${index}?usuario=${usuario}">Página Inicial</a></button>
+        	<button class="btn btn-secondary"><a href="${index}?usuario=${usr}">Página Inicial</a></button>
         </div>        
   </div>
 </div>  

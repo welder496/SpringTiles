@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 
 @Entity
 public class Usuario {
@@ -24,8 +23,7 @@ public class Usuario {
 	
 	private boolean enabled;
 	
-	@Transient
-	private String regranome;
+	private String descricaoRegra;
 	
 	/**
 	 * Unidirecional relationship with Regra (Usuario see Regra)
@@ -82,20 +80,20 @@ public class Usuario {
 		this.codigo = codigo;
 	}
 
-	public String getRegranome() {
-		return regranome;
-	}
-
-	public void setRegranome(String regranome) {
-		this.regranome = regranome;
-	}
-
 	public boolean getEnabled() {
 		return enabled;
 	}
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public String getDescricaoRegra() {
+		return descricaoRegra;
+	}
+
+	public void setDescricaoRegra(String descricaoRegra) {
+		this.descricaoRegra = descricaoRegra;
 	}
 	
 }
