@@ -1,5 +1,6 @@
 package br.jus.cnj.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,16 +18,20 @@ public class Usuario {
 	private Integer codigo;
 	
 	@NotEmpty
+	@Column(name="nome",unique=true,nullable=false)
 	private String nome;
 	
 	@NotEmpty
+	@Column(name="username",unique=true,nullable=false)
 	private String username;
 	
 	@NotEmpty
+	@Column(name="password",unique=true,nullable=false)
 	private String password;
 	
 	@Email
 	@NotEmpty
+	@Column(name="email",unique=true,nullable=false)
 	private String email;
 	
 	private boolean enabled;
