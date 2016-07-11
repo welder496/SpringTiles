@@ -59,8 +59,7 @@ public class ConvidadoController {
                 return "redirect:/mostrarConvidados/1?usuario="+usuario;
             }
         } else {
-            model.addAttribute("convidados", convidados.findAllOrdered());
-            return "redirect:/mostrarConvidados/1?usuario="+usuario;
+            return "cadastrarConvidado";
         }		
 	}
 	
@@ -92,8 +91,7 @@ public class ConvidadoController {
                 return "redirect:/mostrarConvidados/1?usuario="+usuario;
             }		
         } else {
-            model.addAttribute("convidados", convidados.findAllOrdered());
-            return "redirect:/mostrarConvidados/1?usuario="+usuario;
+            return "mostrarEdicaoConvidado";
 		}
 	}
 	

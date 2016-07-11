@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class Convidado {
 
@@ -13,6 +15,7 @@ public class Convidado {
 	private int codigo;
 	
 	@Column(length=60)
+	@NotEmpty
 	private String nome;
 
 	public int getCodigo() {

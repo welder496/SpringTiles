@@ -19,6 +19,7 @@
 	  		<fieldset class="form-group">
 	  			<form:label path="nome">Nome</form:label>
 	  			<form:input type="text" path="nome" class="form-control"/>
+  				<form:errors path="nome" cssStyle="color:red;"/>
 	  		</fieldset>
 			<input type="submit" value="Atualizar" class="btn btn-secondary"/>
 			<input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />

@@ -1,7 +1,6 @@
 package br.jus.cnj.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 import javax.validation.Valid;
 
@@ -16,9 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import br.jus.cnj.model.Convidado;
+import br.jus.cnj.controller.validators.UsuarioRegraValidator;
+import br.jus.cnj.model.Regra;
 import br.jus.cnj.model.Usuario;
 import br.jus.cnj.repository.RegraRepository;
 import br.jus.cnj.repository.UsuarioRepository;
@@ -26,6 +25,9 @@ import br.jus.cnj.service.UsuarioService;
 
 @Controller
 public class UsuarioController {
+	
+	@Autowired
+	private UsuarioRegraValidator usuarioRegraValidator;
 	
 	@Autowired
 	private UsuarioRepository usuarios;
@@ -59,7 +61,14 @@ public class UsuarioController {
 	@RequestMapping(value="/cadastrarUsuario", method=RequestMethod.GET)
 	public String cadastrarUsuario(@RequestParam(value="usuario", required=false) String usr,Model model){
 			Usuario usuario = new Usuario();			
-			model.addAttribute("regras",regras.findAllByDescription());
+			
+			LinkedHashMap<Integer,String> regrasList = new LinkedHashMap<Integer,String>();
+			regrasList.put(0,"--Selecionar uma opção--");
+			for (Regra regra:regras.findAll()){
+				regrasList.put(regra.getCodigo(), regra.getDescricao());
+			}
+			
+			model.addAttribute("regras",regrasList);
 			model.addAttribute("usuario",usuario);
 			model.addAttribute("usr",usr);		
 			return "cadastrarUsuario";
@@ -76,8 +85,13 @@ public class UsuarioController {
 	@RequestMapping(value="/atualizarUsuario/{codigo}", method=RequestMethod.GET)
 	public String atualizarUsuario(@RequestParam(value="usuario", required=false) String usr,@PathVariable("codigo") int codigo,@ModelAttribute("usuario") Usuario usuario, Model model){
 		usuario = usuarios.findOne(codigo);
-		model.addAttribute("regras",regras.findAllByDescription());
-		model.addAttribute("regra",usuario.getRegra().getDescricao());
+
+		LinkedHashMap<Integer,String> regrasList = new LinkedHashMap<Integer,String>();
+		regrasList.put(0,"--Selecionar uma opção--");
+		for (Regra regra:regras.findAll()){
+			regrasList.put(regra.getCodigo(), regra.getDescricao());
+		}		
+		model.addAttribute("regras", regrasList);
 		model.addAttribute("usuario", usuario);
 		model.addAttribute("usr",usr);
 		return "mostrarEdicaoUsuario";
@@ -85,9 +99,9 @@ public class UsuarioController {
 	
 	@RequestMapping(value="/atualizarUsuario", method=RequestMethod.POST)
 	public String atualizarUsuario(@RequestParam(value="usuario", required=false) String usr,@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model){
+		usuarioRegraValidator.validate(usuario, result);
 		if (! result.hasErrors()){
             try {
-            	usuario.setRegra(regras.findRegraByDescription(usuario.getDescricaoRegra()));
             	usuarios.save(usuario);
                 model.addAttribute("usuarios", usuarios.findAllOrdered());
                 return "redirect:/mostrarUsuarios/1?usuario="+usr;
@@ -97,17 +111,22 @@ public class UsuarioController {
                 return "redirect:/mostrarUsuarios/1?usuario="+usr;
             }		
         } else {
-            model.addAttribute("usuarios", usuarios.findAllOrdered());
-            return "redirect:/mostrarUsuarios/1?usuario="+usr;
+			LinkedHashMap<Integer,String> regrasList = new LinkedHashMap<Integer,String>();
+			regrasList.put(0,"--Selecionar uma opção--");
+			for (Regra regra:regras.findAll()){
+				regrasList.put(regra.getCodigo(), regra.getDescricao());
+			}			
+			model.addAttribute("regras", regrasList);
+			return "mostrarEdicaoUsuario";
 		}
 	}	
 	
 	@RequestMapping(value="/cadastrarUsuario", method=RequestMethod.POST)
 	public String salvarUsuario(@RequestParam(value="usuario", required=false) String usr,@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model){
-        if (!result.hasErrors()) {
+        usuarioRegraValidator.validate(usuario, result);
+		if (!result.hasErrors()) {
             try {
-            	usuario.setRegra(regras.findRegraByDescription(usuario.getDescricaoRegra()));
-                usuarios.save(usuario);
+            	usuarios.save(usuario);
                 return "redirect:/mostrarUsuarios/1?usuario="+usr;
             } catch (UnexpectedRollbackException e) {
                 model.addAttribute("usuarios", usuarios.findAllOrdered());
@@ -115,8 +134,13 @@ public class UsuarioController {
                 return "redirect:/mostrarUsuarios/1?usuario="+usr;
             }
         } else {
-            model.addAttribute("usuarios", usuarios.findAllOrdered());
-            return "redirect:/mostrarUsuarios/1?usuario="+usr;
+			LinkedHashMap<Integer,String> regrasList = new LinkedHashMap<Integer,String>();
+			regrasList.put(0,"--Selecionar uma opção--");
+			for (Regra regra:regras.findAll()){
+				regrasList.put(regra.getCodigo(), regra.getDescricao());
+			}			
+			model.addAttribute("regras", regrasList);
+			return "cadastrarUsuario";
         }		
 	}
 	

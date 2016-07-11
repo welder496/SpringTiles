@@ -6,6 +6,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class Usuario {
 
@@ -13,23 +16,26 @@ public class Usuario {
 	@GeneratedValue
 	private Integer codigo;
 	
+	@NotEmpty
 	private String nome;
 	
+	@NotEmpty
 	private String username;
 	
+	@NotEmpty
 	private String password;
 	
+	@Email
+	@NotEmpty
 	private String email;
 	
 	private boolean enabled;
-	
-	private String descricaoRegra;
 	
 	/**
 	 * Unidirecional relationship with Regra (Usuario see Regra)
 	 */
 	@ManyToOne
-	@JoinColumn(name="regraId")
+	@JoinColumn(name="regraId",nullable=false)
 	private Regra regra;
 	
 	public String getUsername() {
@@ -86,14 +92,6 @@ public class Usuario {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
-	}
-
-	public String getDescricaoRegra() {
-		return descricaoRegra;
-	}
-
-	public void setDescricaoRegra(String descricaoRegra) {
-		this.descricaoRegra = descricaoRegra;
 	}
 	
 }
