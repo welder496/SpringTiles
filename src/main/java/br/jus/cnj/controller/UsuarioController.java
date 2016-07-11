@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.ui.Model;
@@ -83,14 +84,17 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value="/atualizarUsuario/{codigo}", method=RequestMethod.GET)
-	public String atualizarUsuario(@RequestParam(value="usuario", required=false) String usr,@PathVariable("codigo") int codigo,@ModelAttribute("usuario") Usuario usuario, Model model){
-		usuario = usuarios.findOne(codigo);
+	public String atualizarUsuario(@RequestParam(value="usuario", required=false) String usr,@PathVariable("codigo") int codigo, Model model){
+		Usuario usuario = usuarios.findOne(codigo);
 
 		LinkedHashMap<Integer,String> regrasList = new LinkedHashMap<Integer,String>();
 		regrasList.put(0,"--Selecionar uma opção--");
 		for (Regra regra:regras.findAll()){
 			regrasList.put(regra.getCodigo(), regra.getDescricao());
 		}		
+		
+		usuario.setPassword("");
+		
 		model.addAttribute("regras", regrasList);
 		model.addAttribute("usuario", usuario);
 		model.addAttribute("usr",usr);
@@ -102,6 +106,10 @@ public class UsuarioController {
 		usuarioRegraValidator.validate(usuario, result);
 		if (! result.hasErrors()){
             try {
+            	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            	
+            	String hashPassword = passwordEncoder.encode(usuario.getPassword());
+            	usuario.setPassword(hashPassword);
             	usuarios.save(usuario);
                 model.addAttribute("usuarios", usuarios.findAllOrdered());
                 return "redirect:/mostrarUsuarios/1?usuario="+usr;
@@ -123,9 +131,13 @@ public class UsuarioController {
 	
 	@RequestMapping(value="/cadastrarUsuario", method=RequestMethod.POST)
 	public String salvarUsuario(@RequestParam(value="usuario", required=false) String usr,@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model){
-        usuarioRegraValidator.validate(usuario, result);
+		usuarioRegraValidator.validate(usuario, result);
 		if (!result.hasErrors()) {
             try {
+            	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            	
+            	String hashPassword = passwordEncoder.encode(usuario.getPassword());
+            	usuario.setPassword(hashPassword);
             	usuarios.save(usuario);
                 return "redirect:/mostrarUsuarios/1?usuario="+usr;
             } catch (UnexpectedRollbackException e) {
