@@ -22,10 +22,14 @@ import br.jus.cnj.model.Regra;
 import br.jus.cnj.model.Usuario;
 import br.jus.cnj.repository.RegraRepository;
 import br.jus.cnj.repository.UsuarioRepository;
+import br.jus.cnj.service.SecurityService;
 import br.jus.cnj.service.UsuarioService;
 
 @Controller
 public class UsuarioController {
+	
+	@Autowired
+	private SecurityService securityService;
 	
 	@Autowired
 	private UsuarioRegraValidator usuarioRegraValidator;
@@ -41,6 +45,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value="/mostrarUsuarios/{pageNumber}", method=RequestMethod.GET)
 	public String mostrarUsuarios(@RequestParam(value="usuario", required=false) String usr,@PathVariable("pageNumber") Integer pageNumber, Model model) {	
+		securityService.getCurrentUser(usr);
 		
 		Page<Usuario> page = usuariosService.getUsuariosPagination(pageNumber);
 			
@@ -61,6 +66,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value="/cadastrarUsuario", method=RequestMethod.GET)
 	public String cadastrarUsuario(@RequestParam(value="usuario", required=false) String usr,Model model){
+			securityService.getCurrentUser(usr);
 			Usuario usuario = new Usuario();			
 			
 			LinkedHashMap<Integer,String> regrasList = new LinkedHashMap<Integer,String>();
@@ -103,6 +109,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value="/atualizarUsuario", method=RequestMethod.POST)
 	public String atualizarUsuario(@RequestParam(value="usuario", required=false) String usr,@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model){
+		securityService.getCurrentUser(usr);
 		usuarioRegraValidator.validate(usuario, result);
 		if (! result.hasErrors()){
             try {
@@ -124,6 +131,7 @@ public class UsuarioController {
 			for (Regra regra:regras.findAll()){
 				regrasList.put(regra.getCodigo(), regra.getDescricao());
 			}			
+			model.addAttribute("usr", usr);
 			model.addAttribute("regras", regrasList);
 			return "mostrarEdicaoUsuario";
 		}
@@ -131,6 +139,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value="/cadastrarUsuario", method=RequestMethod.POST)
 	public String salvarUsuario(@RequestParam(value="usuario", required=false) String usr,@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model){
+		securityService.getCurrentUser(usr);
 		usuarioRegraValidator.validate(usuario, result);
 		if (!result.hasErrors()) {
             try {
@@ -152,6 +161,7 @@ public class UsuarioController {
 				regrasList.put(regra.getCodigo(), regra.getDescricao());
 			}			
 			model.addAttribute("regras", regrasList);
+			model.addAttribute("usr",usr);
 			return "cadastrarUsuario";
         }		
 	}

@@ -31,11 +31,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import br.jus.cnj.model.Convidado;
 import br.jus.cnj.repository.ConvidadoRepository;
 import br.jus.cnj.service.ConvidadoService;
+import br.jus.cnj.service.SecurityService;
 
 @Controller
 public class ConvidadoController {
 
-	HashSet<User> userList = new HashSet<User>();
+	//HashSet<User> userList = new HashSet<User>();
+	
+	@Autowired
+	private SecurityService securityService;
 	
 	@Autowired
 	private ConvidadoRepository convidados;
@@ -43,13 +47,14 @@ public class ConvidadoController {
 	@Autowired
 	private ConvidadoService convidadosService;
 	
-	@Autowired
-	@Qualifier("sessionRegistry")
-	private SessionRegistry sessionRegistry;
+	//@Autowired
+	//@Qualifier("sessionRegistry")
+	//private SessionRegistry sessionRegistry;
 	
 	@RequestMapping(value="/cadastrarConvidado", method=RequestMethod.POST)
 	public String novoConvidado(@RequestParam(value="usuario", required=false) String usuario,@Valid @ModelAttribute("convidado") Convidado convidado, BindingResult result, Model model){
-        if (!result.hasErrors()) {
+		securityService.getCurrentUser(usuario);
+		if (!result.hasErrors()) {
             try {
                 convidados.save(convidado);
                 return "redirect:/mostrarConvidados/1?usuario="+usuario;
@@ -59,6 +64,7 @@ public class ConvidadoController {
                 return "redirect:/mostrarConvidados/1?usuario="+usuario;
             }
         } else {
+        	model.addAttribute("usuario", usuario);
             return "cadastrarConvidado";
         }		
 	}
@@ -80,6 +86,7 @@ public class ConvidadoController {
 	
 	@RequestMapping(value="/atualizarConvidado", method=RequestMethod.POST)
 	public String atualizarConvidado(@RequestParam(value="usuario", required=false) String usuario,@Valid @ModelAttribute("convidado") Convidado convidado, BindingResult result, Model model){
+		securityService.getCurrentUser(usuario);
 		if (! result.hasErrors()){
             try {
                 convidados.save(convidado);
@@ -91,6 +98,7 @@ public class ConvidadoController {
                 return "redirect:/mostrarConvidados/1?usuario="+usuario;
             }		
         } else {
+        	model.addAttribute("usuario",usuario);
             return "mostrarEdicaoConvidado";
 		}
 	}
@@ -105,7 +113,7 @@ public class ConvidadoController {
 	
 	@RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
 	public String accessDeniedPage(Model model) {
-		model.addAttribute("user", getPrincipal());
+		model.addAttribute("user", securityService.getPrincipal());
 		return "accessDenied";
 	}	
 	
@@ -128,7 +136,7 @@ public class ConvidadoController {
 	
 	@RequestMapping(value="/mostrarConvidados/{pageNumber}", method=RequestMethod.GET)
 	public String mostraConvidadosPaginado(@RequestParam(value="usuario", required=false) String usuario,@PathVariable("pageNumber") Integer pageNumber, Model model) {
-		getCurrentUser(usuario);
+		securityService.getCurrentUser(usuario);
 		
 		Page<Convidado> page = convidadosService.getConvidadosPagination(pageNumber);
 			
@@ -148,42 +156,12 @@ public class ConvidadoController {
 	}
 	
 	@RequestMapping(value={"/","/index"}, method=RequestMethod.GET)
-	public String getPhrase(@RequestParam(value="usuario", required=false) String usuario,HttpServletRequest request,HttpServletResponse response, Model model){	
+	public String index(@RequestParam(value="usuario", required=false) String usuario,HttpServletRequest request,HttpServletResponse response, Model model){	
 		
-		getCurrentUser(usuario);
+		securityService.getCurrentUser(usuario);
 		
-		model.addAttribute("usuario",getPrincipal());		
+		model.addAttribute("usuario",securityService.getPrincipal());		
 	    return "index";
 	}
-	
-	private String getPrincipal(){
-		String userName = null;
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		if (principal instanceof UserDetails){
-			userName = ((UserDetails)principal).getUsername();
-		} else {
-			userName = principal.toString();
-		}
-		return userName;
-	}
-	
-	private void getCurrentUser(String usuario){
-		SecurityContext ctx = SecurityContextHolder.getContext();
-		
-		List<Object> principals = sessionRegistry.getAllPrincipals();
-		for (Object principal: principals){
-			if (principal instanceof User){
-				userList.add((User)principal);
-			}
-		}
-		
-		for (User user: userList){
-			if (user.getUsername().equals(usuario)) {
-				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword(),user.getAuthorities());
-				ctx.setAuthentication(authentication);				
-			}
-		}		
-	}
-	
 }
