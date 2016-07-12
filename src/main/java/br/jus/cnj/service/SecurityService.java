@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -52,5 +53,17 @@ public class SecurityService {
 		}		
 	}
 	
+	public void expireUserSessions(String usuario){
+		for (Object principal: sessionRegistry.getAllPrincipals()){
+			if (principal instanceof User){
+				UserDetails userDetails = (UserDetails) principal;
+				if (userDetails.getUsername().equals(usuario)){
+					for (SessionInformation information: sessionRegistry.getAllSessions(userDetails, true)){
+						information.expireNow();
+					}
+				}
+			}
+		}
+	}
 	
 }

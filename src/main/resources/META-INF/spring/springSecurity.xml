@@ -18,11 +18,11 @@ http://www.springframework.org/schema/security/spring-security.xsd">
                      password-parameter="password"
                      authentication-failure-url="/Access_Denied" />
                      
-        <logout logout-url="/Access_Denied" invalidate-session="true"/>             
+        <logout logout-url="/Access_Denied" invalidate-session="true" delete-cookies="JSESSIONID"/>             
         <access-denied-handler error-page="/Access_Denied"/>     
         
 		<session-management>
-        	<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" expired-url="/Access_Denied"
+        	<concurrency-control max-sessions="100" error-if-maximum-exceeded="true" expired-url="/Access_Denied"
         	session-registry-alias="sessionRegistry"/>
     	</session-management>                
     	<csrf/>
