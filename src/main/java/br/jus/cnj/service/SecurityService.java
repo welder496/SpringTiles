@@ -59,6 +59,7 @@ public class SecurityService {
 				UserDetails userDetails = (UserDetails) principal;
 				if (userDetails.getUsername().equals(usuario)){
 					for (SessionInformation information: sessionRegistry.getAllSessions(userDetails, true)){
+						userList.remove((User)principal);
 						information.expireNow();
 					}
 				}
