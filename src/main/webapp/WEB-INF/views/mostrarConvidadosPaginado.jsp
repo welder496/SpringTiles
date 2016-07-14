@@ -17,8 +17,6 @@
 <c:url var="prevUrl" value="/mostrarConvidados/${currentIndex-1}" />
 <c:url var="nextUrl" value="/mostrarConvidados/${currentIndex+1}" />
 
-<div id="mainWrapper">
-  <div class="container">
     <ul class="pagination">
     	<c:set var="usuario" value="${usuario}"/>
         <c:choose>
@@ -86,7 +84,6 @@
             <spring:url var = "index" value="/index"/>        	
         	<button class="btn btn-secondary"><a href="${index}?usuario=${usuario}">Página Inicial</a></button>
         </div>        
-  </div>
-</div>  
+
 </body>
 </html>

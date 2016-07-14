@@ -25,7 +25,7 @@
         <param-value>classpath:/META-INF/spring/applicationContext.xml,
                      classpath:/META-INF/spring/infrastructure.xml,
                      classpath:/META-INF/spring/jpaContext.xml,
-                     classpath:/META-INF/spring/springSecurity.xml                     
+                     classpath:/META-INF/spring/springSecurity.xml
         </param-value>
     </context-param>
 

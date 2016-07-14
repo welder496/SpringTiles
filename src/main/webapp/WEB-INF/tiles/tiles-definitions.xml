@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>  
+   <definition name="base.definition"
+       template="/WEB-INF/templates/defaultLayout.jsp">  
+       <put-attribute name="title" value="" />  
+       <put-attribute name="header" value="/WEB-INF/templates/defaultHeader.jsp" />  
+       <put-attribute name="menu" value="/WEB-INF/templates/defaultMenu.jsp" />  
+       <put-attribute name="body" value="" />  
+       <put-attribute name="footer" value="/WEB-INF/templates/defaultFooter.jsp" />  
+   </definition>       
+   
+   <definition name="index" extends="base.definition">
+   </definition>
+   
+   <definition name="cadastrarConvidado" extends="base.definition">
+   	   <put-attribute name="body" value="/WEB-INF/views/cadastrarConvidado.jsp"/>
+   </definition>
+   
+   <definition name="cadastrarUsuario" extends="base.definition">
+   	   <put-attribute name="body" value="/WEB-INF/views/cadastrarUsuario.jsp"/>
+   </definition>
+   
+   <definition name="mostrarEdicaoConvidado" extends="base.definition">
+   	   <put-attribute name="body" value="/WEB-INF/views/mostrarEdicaoConvidado.jsp"/>
+   </definition>
+   
+   <definition name="mostrarEdicaoUsuario" extends="base.definition">
+   	   <put-attribute name="body" value="/WEB-INF/views/mostrarEdicaoUsuario.jsp"/>
+   </definition>
+   
+   <definition name="mostrarConvidadosPaginado" extends="base.definition">
+   	   <put-attribute name="body" value="/WEB-INF/views/mostrarConvidadosPaginado.jsp"/>
+   </definition>
+   
+   <definition name="mostrarUsuariosPaginado" extends="base.definition">
+   	   <put-attribute name="body" value="/WEB-INF/views/mostrarUsuariosPaginado.jsp"/>
+   </definition>
+   
+</tiles-definitions>

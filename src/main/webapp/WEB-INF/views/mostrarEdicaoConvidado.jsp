@@ -11,21 +11,17 @@
 	<title>Alterar Convidados</title>
 </head>
 <body>
-  <div id="mainWrapper">
-	 <div class="container">
-		 <spring:url var = "action" value="/atualizarConvidado"/>
-		 <h3> Alterar convidados</h3>
-		 <form:form action="${action}?usuario=${usuario}" modelAttribute="convidado" method="POST">
-	  		<fieldset class="form-group">
-	  			<form:label path="nome">Nome</form:label>
-	  			<form:input type="text" path="nome" class="form-control"/>
-  				<form:errors path="nome" cssStyle="color:red;"/>
-	  		</fieldset>
-			<input type="submit" value="Atualizar" class="btn btn-secondary"/>
-			<input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />
-	  		<form:hidden path="codigo" value="${convidado.codigo}" />
-	   	 </form:form>
-	  </div>
-  </div>	  
+	 <spring:url var = "action" value="/atualizarConvidado"/>
+	 <h3> Alterar convidados</h3>
+	 <form:form action="${action}?usuario=${usuario}" modelAttribute="convidado" method="POST">
+  		<fieldset class="form-group">
+  			<form:label path="nome">Nome</form:label>
+  			<form:input type="text" path="nome" class="form-control"/>
+			<form:errors path="nome" cssStyle="color:red;"/>
+  		</fieldset>
+		<input type="submit" value="Atualizar" class="btn btn-secondary"/>
+		<input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />
+  		<form:hidden path="codigo" value="${convidado.codigo}" />
+   	 </form:form>
 </body>
 </html>
